@@ -62,14 +62,14 @@ export default function LoginPage() {
 
         <button
           disabled={loading}
-          className="w-full rounded bg-black text-white py-2 disabled:opacity-60"
+          className="w-full rounded bg-purple-800 text-white  hover:bg-purple-900 py-2 disabled:opacity-60"
         >
           {loading ? "Signing in..." : "Sign in"}
         </button>
 
         <p className="text-sm">
           No account yet?{" "}
-          <a className="underline" href="/register">
+          <a className="underline hover:cursor-pointer" href="/register">
             Register
           </a>
         </p>

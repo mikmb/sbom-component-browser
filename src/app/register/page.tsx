@@ -72,14 +72,14 @@ export default function RegisterPage() {
 
         <button
           disabled={loading}
-          className="w-full rounded bg-black text-white py-2 disabled:opacity-60"
+          className="w-full rounded  bg-purple-800 text-white  hover:bg-purple-900 py-2 disabled:opacity-60"
         >
           {loading ? "Creating account..." : "Create account"}
         </button>
 
         <p className="text-sm">
           Already have an account?{" "}
-          <a className="underline" href="/login">
+          <a className="underline hover:cursor-pointer" href="/login">
             Login
           </a>
         </p>

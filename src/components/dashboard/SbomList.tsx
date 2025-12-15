@@ -15,7 +15,7 @@ export default function SbomList({
   return (
     <div className="border rounded overflow-hidden">
       {/* Desktop/tablet header */}
-      <div className="hidden md:grid sticky top-0 z-10 grid-cols-12 gap-2 px-3 py-2 border-b bg-gray-100 text-sm font-semibold text-gray-800">
+      <div className="hidden md:grid sticky top-0 z-0 grid-cols-12 gap-2 px-3 py-2 border-b bg-gray-100 text-sm font-semibold text-gray-800">
         <div className="col-span-7 lg:col-span-5">Name</div>
 
         {/* Hide Project on md, show on lg+ */}

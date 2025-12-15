@@ -40,7 +40,7 @@ Built with **Next.js (App Router)**, **TypeScript**, **PostgreSQL**, and **Prism
 ## Getting Started (Local Development)
 1️⃣ **Prerequisites**
 
-- **Node.js** 18+
+- **Node.js** 20.19+
 - **Docker** (recommended for PostgreSQL)
 - npm or pnpm
 

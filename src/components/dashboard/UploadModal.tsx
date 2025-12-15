@@ -99,7 +99,7 @@ export default function UploadModal({
   }
 
   return (
-    <div className="fixed inset-0 bg-black/40 flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center p-4">
       <div className="w-full max-w-lg bg-white rounded border p-5 space-y-3">
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-semibold">Upload SBOM</h2>
@@ -214,7 +214,7 @@ export default function UploadModal({
                 <span className="text-xs text-gray-500">JSON</span>
               </div>
             ) : (
-              <div className="text-gray-600">
+              <div className="text-600">
                 No file selected. Choose a{" "}
                 <span className="font-medium">.json</span> SBOM.
               </div>
