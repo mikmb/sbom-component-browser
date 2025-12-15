@@ -52,7 +52,7 @@ Built with **Next.js (App Router)**, **TypeScript**, **PostgreSQL**, and **Prism
 npm install
 ```
 
-# 🐳 Running PostgreSQL with Docker (Recommended)
+## 🐳 Running PostgreSQL with Docker (Recommended)
 
 This project includes a docker-compose.yml file to run PostgreSQL locally.
 
@@ -110,7 +110,7 @@ Open your browser at:
 http://localhost:3000
 ```
 
-##Usage
+## Usage
 
 1. Register a user account
 2. Log in
