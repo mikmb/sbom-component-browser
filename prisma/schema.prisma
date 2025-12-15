@@ -1,0 +1,93 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum SbomFormat {
+  CYCLONEDX
+  SPDX
+  OTHER
+}
+
+enum SbomStatus {
+  UPLOADED
+  PARSING
+  READY
+  FAILED
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  projects Project[]
+}
+
+model Project {
+  id        String   @id @default(cuid())
+  ownerId   String
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  owner User   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  sboms Sbom[]
+
+  @@unique([ownerId, name])
+  @@index([ownerId])
+}
+
+model Sbom {
+  id           String     @id @default(cuid())
+  projectId    String
+  name         String
+  filename     String
+  format       SbomFormat @default(OTHER)
+  specVersion  String?
+  status       SbomStatus @default(UPLOADED)
+  uploadedAt   DateTime   @default(now())
+  parsedAt     DateTime?
+  errorMessage String?
+  rawJson      Json?
+
+  project    Project     @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  components Component[]
+
+  @@index([projectId])
+  @@index([status])
+}
+
+model Component {
+  id     String @id @default(cuid())
+  sbomId String
+
+  name     String
+  version  String?
+  purl     String?
+  group    String?
+  type     String?
+  supplier String?
+  license  String?
+  scope    String?
+  metadata Json?
+
+  sbom Sbom @relation(fields: [sbomId], references: [id], onDelete: Cascade)
+
+  @@index([sbomId])
+  @@index([name])
+  @@index([name, version])
+  @@index([purl])
+}

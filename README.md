@@ -1,36 +1,140 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SBOM Component Browser
 
-## Getting Started
+A web application for uploading, parsing, and exploring Software Bill of Materials (SBOMs).
+The app extracts components from SBOM JSON files (CycloneDX / SPDX-style) and makes them searchable across projects.
 
-First, run the development server:
+Built with **Next.js (App Router)**, **TypeScript**, **PostgreSQL**, and **Prisma**.
 
+## Features
+
+- Upload SBOM JSON files
+- Parse and normalize components into a relational database
+- Browse SBOMs by project
+- Search SBOMs by component name
+- View SBOM details and component lists
+- Paginated component tables
+- Delete SBOMs
+- Authentication using **NextAuth (Credentials provider)**
+
+## Tech Stack
+### Frontend
+
+- **Next.js** (App Router)
+- **React**
+- **TypeScript**
+- **Tailwind CSS**
+
+### Backend
+- **Next.js API Routes**
+- **NextAuth / Auth.js**
+- **Prisma ORM**
+- **PostgreSQL**
+
+### Tooling
+- Prisma Migrate
+- ESLint
+- Prettier
+- **Node.js 18+
+
+
+## Getting Started (Local Development)
+1️⃣ **Prerequisites**
+
+- **Node.js** 18+
+- **Docker** (recommended for PostgreSQL)
+- npm or pnpm
+
+
+2️⃣ **Clone the repository**
+
+3️⃣ **Install dependencies**
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# 🐳 Running PostgreSQL with Docker (Recommended)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+This project includes a docker-compose.yml file to run PostgreSQL locally.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Start the database
+```bash
+docker compose up -d
+```
 
-## Learn More
+This starts a PostgreSQL 16 container with:
 
-To learn more about Next.js, take a look at the following resources:
+- Database: sbom_browser
+- Username: postgres
+- Password: postgres
+- Port: 5432
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Stop the database
+```bash
+docker compose down
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+To stop and remove all data:
+```bash
+docker compose down -v
+```
 
-## Deploy on Vercel
+4️⃣ ***Configure environment variables***
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Create a .env file in the root:
+```env
+DATABASE_URL="postgresql://postgres:postgres@localhost:5432/sbom_browser"
+NEXTAUTH_SECRET="super-secret-key"
+NEXTAUTH_URL="http://localhost:3000"
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+5️⃣ ***Set up the database***
+
+Run Prisma migrations and generate the client:
+```bash
+npx prisma migrate dev
+npx prisma generate
+```
+
+(Optional) View the database:
+```bash
+npx prisma studio
+```
+
+6️⃣ ***Run the development server***
+```bash
+npm run dev
+```
+
+Open your browser at:
+```
+http://localhost:3000
+```
+
+##Usage
+
+1. Register a user account
+2. Log in
+3. Registered user will have a project called Default
+4. Upload an SBOM JSON file
+    - User has the option to create a project in the Upload modal
+5. Browse and search components
+6. View SBOM details and components
+7. Delete SBOMs when no longer needed
+
+## Supported SBOM Formats
+
+The parser currently supports:
+
+- CycloneDX-style JSON
+- SPDX-style JSON (basic support)
+
+Unsupported or malformed files will be rejected gracefully.
+
+
+## Authentication
+
+- Uses **NextAuth Credentials Provider**
+- Passwords are hashed with **bcrypt**
+- Session strategy: **JWT**
+
+
