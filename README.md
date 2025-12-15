@@ -137,4 +137,26 @@ Unsupported or malformed files will be rejected gracefully.
 - Passwords are hashed with **bcrypt**
 - Session strategy: **JWT**
 
+### Some Screenshots
+
+Login page:
+![Alt text for accessibility](docs/screenshots/login-modal.png)
+
+Register page:
+![Alt text for accessibility](docs/screenshots/register-modal.png)
+
+Sbom Component Browser Empty Dashboard:
+![Alt text for accessibility](docs/screenshots/empty-dashboard.png)
+
+Upload Modal:
+![Alt text for accessibility](docs/screenshots/upload-modal.png)
+
+Sbom List:
+![Alt text for accessibility](docs/screenshots/sbom-list.png)
+
+Search Component Name:
+![Alt text for accessibility](docs/screenshots/search-component-name.png)
+
+Component Detail:
+![Alt text for accessibility](docs/screenshots/component-detail.png)
 
